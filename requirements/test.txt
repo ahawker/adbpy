@@ -1,0 +1,9 @@
+# adbpy/requirements/test.txt
+#
+# Contains requirements for executing adbpy tests.
+
+-r base.txt
+
+pytest
+pytest-cov
+
