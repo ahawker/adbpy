@@ -2,11 +2,25 @@
 
 all: clean-pyc test
 
-test:
-	py.test
+venv-activate:
+	$(eval PWD := $(shell pwd))
+	test -d $(PWD)/.venv || virtualenv $(PWD)/.venv --no-site-packages --distribute
+	. $(PWD)/.venv/bin/activate; pip install -Ur requirements.txt
+	touch $(PWD)/.venv/bin/activate
+
+venv: venv-activate
+
+test: venv
+	py.test tests
 
 tox:
 	tox
+
+travis-install:
+	pip install --user --q -r requirements/test.txt
+
+travis: travis-install
+	TOXENV=py($echo $TRAVIS_PYTHON_VERSION) | tr -d .) tox
 
 clean-pyc:
 	find . -name '__pycache__' -type d -exec rm -r {} +
