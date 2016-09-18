@@ -5,6 +5,13 @@ Python implementation of the Android Debug Bridge (ADB) protocol using `libusb` 
 
 This package is under active (slow) development and is not ready nor used by any other systems.
 
+### Goals
+
+* Provide a _mostly_ pure python implementation of the ADB protocol.
+* Communicate directly to `adbd` running on a device/emulator without the requirements of `adb server` running on the host.
+* Support synchronous and asynchronous (asyncio) APIs.
+* Handle command/connection/communication multiplexing, so a caller can run _background_ calls (stream logcat output) while executing other commands.
+
 ### Installation
 
 To install adbpy from [pip](https://pypi.python.org/pypi/pip):
