@@ -1,6 +1,10 @@
 # adbpy
 Python implementation of the Android Debug Bridge (ADB) protocol using `libusb` and `asyncio`.
 
+### Status
+
+This package is under active (slow) development and is not ready nor used by any other systems.
+
 ### Installation
 
 To install adbpy from [pip](https://pypi.python.org/pypi/pip):
