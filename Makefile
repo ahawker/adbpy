@@ -17,7 +17,7 @@ tox:
 	tox
 
 travis-install:
-	pip install --user --q -r requirements/test.txt
+	pip install -q -r requirements/test.txt
 
 travis: travis-install
 	TOXENV=py($echo $TRAVIS_PYTHON_VERSION) | tr -d .) tox
