@@ -19,7 +19,7 @@ version_regex = re.compile(r'__version__\s+=\s+(.*)')
 
 
 def get_version():
-    with open('adb/__init__.py', 'r') as f:
+    with open('adbpy/__init__.py', 'r') as f:
         return str(ast.literal_eval(version_regex.search(f.read()).group(1)))
 
 
@@ -32,8 +32,8 @@ setup(
     license='Apache 2.0',
     description='Python implementation of the Android Debug Bridge (ADB).',
     long_description=__doc__,
-    packages=['adb'],
-    package_dir={'adb': 'adb'},
+    packages=['adbpy'],
+    package_dir={'adbpy': 'adbpy'},
     include_package_data=True,
     classifiers=(
         'Development Status :: 2 - Pre-Alpha',
