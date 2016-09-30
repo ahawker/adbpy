@@ -8,7 +8,7 @@
 
 class MessageError(Exception):
     """
-    Base exception class for dealing with all message related errors.
+    Base exception for all message related errors.
     """
 
 
