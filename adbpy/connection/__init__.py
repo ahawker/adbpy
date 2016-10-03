@@ -25,6 +25,12 @@ class ConnectionRequiredError(ConnectionError):
     """
 
 
+class ConnectionTimeoutError(ConnectionError):
+    """
+    Exception raised when the wrapped transport raises a timeout related exception.
+    """
+
+
 def requires_active_connection(func):
     """
     Decorator that enforces calls on the :class:`~adbpy.connection.Connection` instance to only be allowed on
