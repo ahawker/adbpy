@@ -60,6 +60,12 @@ class USBDeviceAccessDenied(USBError):
     """
 
 
+class USBIncompleteSendError(USBError):
+    """
+    Exception raised when unable to write an entire buffer to the USB device.
+    """
+
+
 class Context:
     """
     Transport context object returned by :meth:`~adbpy.transport.sync.usb.Transport.connect`.
@@ -393,7 +399,12 @@ def _write_bytes_to_endpoint_address(handle, endpoint_address, data, timeout):
     if WIRE_LOGGER.isEnabledFor(logging.DEBUG):
         WIRE_LOGGER.debug('>>> {}'.format(data))
 
-    return handle.bulkWrite(endpoint_address, data, timeout)
+    num_bytes = handle.bulkWrite(endpoint_address, data, timeout)
+
+    if num_bytes != len(data):
+        raise USBIncompleteSendError('Expected {}; sent {}'.format(len(data), num_bytes))
+
+    return None
 
 
 def _read_bytes_from_endpoint_address(handle, endpoint_address, num_bytes, timeout):
