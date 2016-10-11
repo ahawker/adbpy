@@ -5,7 +5,7 @@
     Contains functionality for dealing with synchronous (blocking) connections.
 """
 
-from adbpy import connection
+from adbpy import connection, exception, transport
 
 
 __all__ = ['Connection']
@@ -17,6 +17,8 @@ class Connection(connection.Connection):
     """
 
     @classmethod
+    @exception.rethrow_timeout(transport.TransportConnectTimeout, connection.ConnectionTimeoutError)
+    @exception.rethrow(transport.TransportError, connection.ConnectionError)
     def connect(cls, transport, *args, **kwargs):
         """
         Create a new connection based on the given transport.
@@ -30,6 +32,8 @@ class Connection(connection.Connection):
         return cls(transport, context)
 
     @connection.requires_active_connection
+    @exception.rethrow_timeout(transport.TransportDisconnectTimeout, connection.ConnectionTimeoutError)
+    @exception.rethrow(transport.TransportError, connection.ConnectionError)
     def disconnect(self, *args, **kwargs):
         """
         Disconnect the connection.
@@ -43,6 +47,8 @@ class Connection(connection.Connection):
         self._context = None
 
     @connection.requires_active_connection
+    @exception.rethrow_timeout(transport.TransportSendTimeout, connection.ConnectionTimeoutError)
+    @exception.rethrow(transport.TransportError, connection.ConnectionError)
     def send(self, data, *args, **kwargs):
         """
         Send the given data buffer over the connection.
@@ -55,6 +61,8 @@ class Connection(connection.Connection):
         return self._transport.send(self._context, data, **kwargs)
 
     @connection.requires_active_connection
+    @exception.rethrow_timeout(transport.TransportReceiveTimeout, connection.ConnectionTimeoutError)
+    @exception.rethrow(transport.TransportError, connection.ConnectionError)
     def recv(self, num_bytes, *args, **kwargs):
         """
         Read bytes from the connection.
