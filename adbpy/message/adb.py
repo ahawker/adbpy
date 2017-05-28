@@ -394,7 +394,7 @@ def _data_to_bytes(data, encoding='utf-8', errors='strict'):
     if isinstance(data, str):
         return data.encode(encoding, errors)
 
-    raise ValueError('Expected bytes/str; got {}'.format(type(data)))
+    raise message.MessageError('Expected bytes/str; got {}'.format(type(data)))
 
 
 def _null_terminated(data):
