@@ -1,6 +1,7 @@
 # adbpy/requirements/base.txt
 #
-# Contains requirements for adbpy package.
+# Contains requirements for package.
 
+bumpversion
 libusb1
 rsa
