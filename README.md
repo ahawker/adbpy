@@ -3,7 +3,9 @@ Python implementation of the Android Debug Bridge (ADB) protocol using `libusb` 
 
 ### Status
 
-This package is under active (slow) development and is not ready nor used by any other systems.
+**Deprecated**
+
+This package has been deprecated in favor the [adbpy](https://github.com/adbpy) organization.
 
 ### Goals
 
